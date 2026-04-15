@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B站录播课本地 RAG 问答系统</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <main class="app-shell">
+        <section class="workspace">
+            <header class="topbar">
+                <div>
+                    <h1>B站录播课本地问答</h1>
+                    <p>搜索公开视频，自动提取音频、转写并构建课程上下文。</p>
+                </div>
+                <button id="login-btn" class="ghost-btn" title="公开视频无需登录，受限视频可配置 cookies">登录 B站</button>
+            </header>
+
+            <section class="search-panel">
+                <div class="search-box">
+                    <input id="keyword-input" type="search" placeholder="输入课程关键词，或直接粘贴 B站视频链接/BV号">
+                    <button id="search-btn">搜索</button>
+                </div>
+                <div id="search-status" class="status-text"></div>
+                <div id="results" class="result-grid"></div>
+            </section>
+
+            <section class="process-panel">
+                <div class="section-title">
+                    <h2>处理进度</h2>
+                    <span id="selected-video">尚未选择视频</span>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-topline">
+                        <strong id="progress-label">等待选择视频</strong>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                    <p id="progress-detail">选择搜索结果后，系统会自动下载音频、转写并构建索引。</p>
+                </div>
+                <div id="timeline" class="timeline"></div>
+            </section>
+
+            <section class="history-panel">
+                <div class="section-title">
+                    <h2>已读取视频</h2>
+                    <button id="refresh-videos" class="ghost-btn">刷新</button>
+                </div>
+                <div id="video-history" class="history-list"></div>
+            </section>
+        </section>
+
+        <aside class="chat-panel">
+            <div class="chat-header">
+                <div>
+                    <h2>课程上下文对话</h2>
+                    <p id="chat-video-title">请先选择并处理一个视频</p>
+                </div>
+            </div>
+            <div id="chat-container" class="chat-container"></div>
+            <form id="chat-form" class="chat-form">
+                <input id="chat-input" type="text" placeholder="基于视频内容提问..." disabled>
+                <button id="send-btn" type="submit" disabled>发送</button>
+            </form>
+        </aside>
+    </main>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
